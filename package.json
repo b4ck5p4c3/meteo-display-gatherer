@@ -1,0 +1,22 @@
+{
+  "name": "meteo-display-gatherer",
+  "version": "1.0.0",
+  "description": "Service that gathers data and displays it on meteo display (BI AIU)",
+  "main": "src/main.ts",
+  "repository": "https://github.com/b4ck5p4c3/meteo-display-gatherer",
+  "author": "radioegor146",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node src/main.ts"
+  },
+  "dependencies": {
+    "@types/node": "^22.10.3",
+    "@types/node-cron": "^3.0.11",
+    "dotenv": "^16.4.7",
+    "mqtt": "^5.10.3",
+    "node-cron": "^3.0.3",
+    "ts-node": "^10.9.2",
+    "tslog": "^4.9.3",
+    "typescript": "^5.7.2"
+  }
+}
