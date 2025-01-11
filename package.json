@@ -15,6 +15,7 @@
     "dotenv": "^16.4.7",
     "mqtt": "^5.10.3",
     "node-cron": "^3.0.3",
+    "prometheus-query": "^3.4.1",
     "ts-node": "^10.9.2",
     "tslog": "^4.9.3",
     "typescript": "^5.7.2"

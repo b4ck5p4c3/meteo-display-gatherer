@@ -1,54 +1,56 @@
+type Maybe<T> = T | null;
+
 export interface DisplayData {
     // two digits [0, 1]
-    hours?: number;
+    hours?: Maybe<number>;
     // two digits [2, 3]
-    minutes?: number;
-    wind?: {
+    minutes?: Maybe<number>;
+    wind?: Maybe<{
         // two digits + zero [4, 5]
-        heading?: number;
+        heading?: Maybe<number>;
         // two digits [6, 7]
-        speed?: number;
+        speed?: Maybe<number>;
         // two digits [20, 21]
-        maxSpeed?: number;
+        maxSpeed?: Maybe<number>;
         // two digits [44, 45]
-        maxPerpendicularSpeed?: number;
-    };
-    pressure?: {
+        maxPerpendicularSpeed?: Maybe<number>;
+    }>;
+    pressure?: Maybe<{
         // four digits [8, 9, 10, 11]
-        hPa?: number;
+        hPa?: Maybe<number>;
         // three digits, decimal point + zero [29, 30, 31]
-        mmHg?: number;
-    };
-    clouds?: {
+        mmHg?: Maybe<number>;
+    }>;
+    clouds?: Maybe<{
         // one/two digits [12]
-        n?: number;
+        n?: Maybe<number>;
         // one/two digits [19]
-        nh?: number;
+        nh?: Maybe<number>;
         // three digits + zero [26, 27, 28]
-        height?: number;
-    };
-    visibility?: {
+        height?: Maybe<number>;
+    }>;
+    visibility?: Maybe<{
         // three digits + zero [41, 42, 43]
-        s?: number;
+        s?: Maybe<number>;
         // three digits + zero [32, 33, 34]
-        l1?: number;
+        l1?: Maybe<number>;
         // three digits + zero [35, 36, 37]
-        l2?: number;
+        l2?: Maybe<number>;
         // three digits + zero [38, 39, 40]
-        l3?: number;
-    };
+        l3?: Maybe<number>;
+    }>;
     // three digits [13, 14, 15]
-    humidity?: number;
+    humidity?: Maybe<number>;
     // two digits with sign [16, 17, 18]
-    temperature?: number;
+    temperature?: Maybe<number>;
     // one sign - [22]
-    hasThunder?: boolean;
+    hasThunder?: Maybe<boolean>;
     // one digit - [23]
-    events?: number;
+    events?: Maybe<number>;
     // one sign - [24] (research more, when 1 - indicator shows nothing)
-    isUrgent?: boolean;
+    isUrgent?: Maybe<boolean>;
     // one digit - [25]
-    unitId?: number;
+    unitId?: Maybe<number>;
     // one sign - [46]
-    hasIcing?: boolean;
+    hasIcing?: Maybe<boolean>;
 }
