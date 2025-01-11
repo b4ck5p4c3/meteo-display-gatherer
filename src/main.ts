@@ -29,13 +29,20 @@ async function fetchDisplayDataAsync(): Promise<void> {
     const prometheusClient = new PrometheusDriver({
         endpoint: PROMETHEUS_ENDPOINT
     })
-    const taxiPriceMetrics: number[] = [];
-    for (const metric of TAXI_PRICE_METRICS) {
-        const result = await prometheusClient.instantQuery(metric);
-        if (result.resultType !== "vector") {
-            continue;
+
+    let taxiPriceMetrics: number[] = [];
+
+    try {
+        for (const metric of TAXI_PRICE_METRICS) {
+            const result = await prometheusClient.instantQuery(metric);
+            if (result.resultType !== "vector") {
+                continue;
+            }
+            taxiPriceMetrics.push(result.result[0].value.value);
         }
-        taxiPriceMetrics.push(result.result[0].value.value);
+    } catch (e) {
+        logger.error(`Failed to fetch taxi metrics: ${e}`);
+        taxiPriceMetrics = [];
     }
 
     await sendDisplayData({
