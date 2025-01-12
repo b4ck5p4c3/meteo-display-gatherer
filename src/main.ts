@@ -5,6 +5,7 @@ import {getLogger} from "./logger";
 import cron from "node-cron";
 import {DisplayData} from "./types";
 import {PrometheusDriver} from "prometheus-query";
+import { Metar } from "./metar";
 
 dotenv.config();
 
@@ -14,12 +15,18 @@ const CA_CERTIFICATE_PATH = process.env.CA_CERTIFICATE_PATH ?? 'ca-cert.pem';
 const MQTT_URL = process.env.MQTT_URL ?? 'mqtts://b4ck:b4ck@mqtt.internal.0x08.in';
 const TAXI_PRICE_METRICS = (process.env.TAXI_PRICE_METRICS ?? '').split(";");
 const PROMETHEUS_ENDPOINT = process.env.PROMETHEUS_ENDPOINT ?? 'http://prometheus:9090';
+const METAR_LOCATION = process.env.METAR_LOCATION ?? null;
+const METAR_RWY = process.env.METAR_RWY ?? null;
 
 const client = mqtt.connect(MQTT_URL, {
     ca: [fs.readFileSync(CA_CERTIFICATE_PATH)]
 });
 
 let fetching = false;
+
+const metar = (METAR_LOCATION && METAR_RWY) 
+    ? new Metar(METAR_LOCATION, METAR_RWY) 
+    : undefined;
 
 async function sendDisplayData(data: DisplayData): Promise<void> {
     await client.publishAsync("bus/services/meteo-display/data", JSON.stringify(data));
@@ -45,15 +52,16 @@ async function fetchDisplayDataAsync(): Promise<void> {
         taxiPriceMetrics = [];
     }
 
+    const metarReport = await metar?.fetch();
     await sendDisplayData({
-        unitId: 7,
-
+        unitId: 8,
         visibility: {
             s: taxiPriceMetrics[0] ?? null,
             l1: taxiPriceMetrics[1] ?? null,
             l2: taxiPriceMetrics[2] ?? null,
             l3: taxiPriceMetrics[3] ?? null
-        }
+        },
+        ...metarReport,
     });
 }
 
