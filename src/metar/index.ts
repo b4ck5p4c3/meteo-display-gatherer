@@ -5,6 +5,7 @@ import { calculateCrosswind, CLOUD_QTY_MAP, WX_MAP } from "./maps";
 
 const HPA_TO_MMHG = 0.75006375541921;
 const INHG_TO_HPA = 33.863889532611;
+const FT_TO_M = 0.3048;
 
 export class Metar {
     private lastMetar: IMetar | null = null;
@@ -52,7 +53,9 @@ export class Metar {
             const highestLayer = layersSorted[layersSorted.length - 1];
 
             if (lowestLayer) {
-                response.clouds.height = lowestLayer.height ?? null;
+                response.clouds.height = typeof lowestLayer.height === 'number' 
+                    ? lowestLayer.height * FT_TO_M 
+                    : null;
                 response.clouds.nh = CLOUD_QTY_MAP.get(lowestLayer.quantity)!
             }
 
