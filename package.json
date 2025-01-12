@@ -13,6 +13,7 @@
     "@types/node": "^22.10.3",
     "@types/node-cron": "^3.0.11",
     "dotenv": "^16.4.7",
+    "metar-taf-parser": "^9.1.1",
     "mqtt": "^5.10.3",
     "node-cron": "^3.0.3",
     "prometheus-query": "^3.4.1",
