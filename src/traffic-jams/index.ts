@@ -37,7 +37,8 @@ export class TrafficJams {
                 unitId: null
             }
         } catch (e) {
-            this.logger.error(`Failed to fetch taxi metrics: ${e}`);
+            console.info(e);
+            this.logger.error(`Failed to fetch metric: ${e}`);
             return {
                 unitId: null
             };

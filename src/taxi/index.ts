@@ -20,7 +20,8 @@ export class Taxi {
                 taxiPriceMetrics.push(result.result[0].value.value);
             }
         } catch (e) {
-            this.logger.error(`Failed to fetch taxi metrics: ${e}`);
+            console.info(e);
+            this.logger.error(`Failed to fetch metrics: ${e}`);
             taxiPriceMetrics = [];
         }
 
