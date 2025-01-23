@@ -47,8 +47,6 @@ async function fetchDisplayDataAsync(): Promise<void> {
     const taxiReport = await taxi.fetch();
     const trafficJamsReport = await trafficJams.fetch();
 
-    console.info(metarReport);
-
     await sendDisplayData({
         ...trafficJamsReport,
         ...taxiReport,
