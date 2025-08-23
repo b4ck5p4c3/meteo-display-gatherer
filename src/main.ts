@@ -51,6 +51,12 @@ async function fetchDisplayDataAsync(): Promise<void> {
         ...trafficJamsReport,
         ...taxiReport,
         ...metarReport,
+        visibility: {
+            s: 2025,
+            l1: 1337,
+            l2: 1337,
+            l3: 2025
+        }
     });
 }
 
